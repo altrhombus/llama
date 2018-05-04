@@ -131,9 +131,9 @@
             </TabItem>
             <TabItem Header="Troubleshooting">
                 <Grid>
-                    <GroupBox Header="Configuration Manager Tasks" Margin="285,18,284,131">
+                    <GroupBox Header="Configuration Manager Tasks" Margin="28,28,541,131">
                         <Grid HorizontalAlignment="Left" Height="263" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
-                            <ListBox HorizontalAlignment="Left" Height="246" Margin="0,0,0,-58" VerticalAlignment="Top" Width="469">
+                            <ListBox HorizontalAlignment="Left" Height="246" Margin="0,0,0,0" VerticalAlignment="Top" Width="469">
                                 <ListBoxItem Content="Application Deployment Evaluation Cycle"/>
                                 <ListBoxItem Content="Discovery Data Collection Cycle"/>
                                 <ListBoxItem Content="Hardware Inventory Cycle" MouseUp="btnHwInvCycle_Click" />
@@ -147,8 +147,19 @@
                             <Label x:Name="lblConfigMgrStatus" Content="Ready" Margin="0,228,10,10" FontStyle="Italic"/>
                         </Grid>
                     </GroupBox>
+                    <GroupBox Header="Log Collection" Margin="541,28,28,131">
+                        <Grid HorizontalAlignment="Left" Height="263" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
+                            <ListBox HorizontalAlignment="Left" Height="246" Margin="0,0,0,0" VerticalAlignment="Top" Width="469">
+                                <ListBoxItem Content="Configuration Manager Logs"/>
+                            </ListBox>
+                        </Grid>
+                    </GroupBox>
+                    <Button Content="Need help?" Margin="480,336,480,84"/>
                 </Grid>
             </TabItem>
+
+
+
         </TabControl>
     </Grid>
 </Controls:MetroWindow>
