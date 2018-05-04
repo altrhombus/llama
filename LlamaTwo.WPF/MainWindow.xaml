@@ -1,0 +1,42 @@
+﻿<Controls:MetroWindow x:Class="LlamaTwo.WPF.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LlamaTwo.WPF"
+        mc:Ignorable="d"
+        BorderThickness="0" 
+        GlowBrush="Black"
+        WindowTransitionsEnabled="True"
+        Title="Llama" Height="350" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Resources/Icons.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Controls:MetroWindow.RightWindowCommands>
+            <Controls:WindowCommands>
+                <Button Content="refresh" Click="RefreshCurrentPage"/>
+                <Button Content="details" Click="ViewDetailsPage" />
+                <Button Content="about" Click="ViewAboutPage" />
+            </Controls:WindowCommands>
+        </Controls:MetroWindow.RightWindowCommands>
+    <Grid>
+        <Ellipse Width="100" Height="100" Margin="172,30,172,191">
+            <Ellipse.Fill>
+                <ImageBrush x:Name="imgUserPhoto"/>
+            </Ellipse.Fill>
+        </Ellipse>
+        <Controls:ProgressRing x:Name="loadingPicture" IsActive="True" Margin="192,50,192,211" />
+        <Label x:Name="lblWelcome" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,135,0,0" VerticalAlignment="Top" Width="424" FontSize="14" Content="" Background="{x:Null}"/>
+        <Controls:MetroProgressBar x:Name="loadingUserName" Height="8" Margin="0,146,0,167" IsEnabled="True" IsIndeterminate="true" Background="{x:Null}" BorderBrush="{x:Null}" />
+        <Label x:Name="lblComputerName" Content="Getting Computer Name..." HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,196,0,0" VerticalAlignment="Top" Width="424" FontSize="20" FontWeight="Bold"/>
+        <Label Content="This computer is" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,178,0,0" VerticalAlignment="Top" Width="424"/>
+
+    </Grid>
+
+
+</Controls:MetroWindow>
