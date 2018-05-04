@@ -72,7 +72,7 @@
                     </GroupBox>
                 </Grid>
             </TabItem>
-            <TabItem Header="Your Computer">
+            <TabItem Header="PC">
                 <Grid>
 
                     <GroupBox Header="Hardware Information" Margin="285,18,284,213">
@@ -100,7 +100,7 @@
                             <Label x:Name="lblOSName" Content="..." HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblOSRelease" Content="..." HorizontalAlignment="Left" Margin="157,36,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblOSBuild" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
-                            <CheckBox Content="Reboot Pending" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top"/>
+                            <CheckBox x:Name="chkIsRebootPending" Content="Reboot Pending" HorizontalAlignment="Left" Margin="10,93,0,0" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
 

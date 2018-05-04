@@ -99,6 +99,7 @@ namespace LlamaTwo.WPF
                 lblOSName.Content = sw.OperatingSystemName();
                 lblOSBuild.Content = sw.OperatingSystemBuild();
                 lblOSRelease.Content = sw.OperatingSystemReleaseId();
+                chkIsRebootPending.IsChecked = sw.IsRebootPending();
             }
             catch (Exception e)
             {
@@ -172,5 +173,6 @@ namespace LlamaTwo.WPF
         {
             TriggerSchedule(hw.ComputerName(), "{00000000-0000-0000-0000-000000000022}");
         }
+        
     }
 }
