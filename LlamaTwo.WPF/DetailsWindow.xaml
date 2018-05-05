@@ -56,7 +56,7 @@
                     <Label x:Name="lblPwExpiration" HorizontalContentAlignment="Center" Content="..." HorizontalAlignment="Left" Margin="769,127,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="72" Width="269"/>
                     <Label Content="Days Until Password Expiration" HorizontalContentAlignment="Center" Margin="769,238,10,180"/>
                     <Button x:Name="btnReportUserInfo" Content="Report Incorrect Information" HorizontalAlignment="Left" Margin="813,307,0,0" VerticalAlignment="Top" Width="182" Click="btnReportUserInfo_Click"/>
-                    <Button x:Name="btnChangePwd" Content="Change Password" HorizontalAlignment="Left" Margin="845,271,0,0" VerticalAlignment="Top" Width="118" Click="btnChangePwd_Click"/>
+                    <Button x:Name="btnChangePwd" Content="Change Password" HorizontalAlignment="Left" Margin="844,272,0,0" VerticalAlignment="Top" Width="118" Click="btnChangePwd_Click"/>
 
                     <Controls:ProgressRing x:Name="loadingYouPage" IsActive="True" />
 
@@ -74,7 +74,6 @@
             </TabItem>
             <TabItem Header="PC">
                 <Grid>
-
                     <GroupBox Header="Hardware Information" Margin="285,18,284,213">
                         <Grid HorizontalAlignment="Left" Height="188" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
                             <Label Content="Manufacturer:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -91,7 +90,6 @@
                             <Label x:Name="lblMemory" Content="..." HorizontalAlignment="Left" Margin="157,140,0,0" VerticalAlignment="Top" />
                         </Grid>
                     </GroupBox>
-
                     <GroupBox Header="Software Information" Margin="285,253,284,28">
                         <Grid HorizontalAlignment="Left" Height="132" Margin="0,0,0,0" VerticalAlignment="Top" Width="469">
                             <Label Content="Operating System:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -105,29 +103,59 @@
                     </GroupBox>
 
                     <Label x:Name="lblComputerName" Content="..." HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="270" FontWeight="Bold" FontSize="14"/>
-                    <TextBox x:Name="lblHwSummary" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="56" Margin="10,239,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="270" IsTabStop="False" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" FontStyle="Italic"/>
+                    <TextBox x:Name="lblUptime" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="56" Margin="10,239,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="270" IsTabStop="False" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" FontStyle="Italic"/>
 
                     <Label x:Name="lblHwWarExpiration" HorizontalContentAlignment="Center" Content="..." HorizontalAlignment="Left" Margin="769,127,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="72" Width="269"/>
                     <Label Content="Days Until Warranty Expiration" HorizontalContentAlignment="Center" Margin="769,238,10,180"/>
 
                     <Controls:ProgressRing x:Name="loadingYourComputerPage" IsActive="True" />
-
                 </Grid>
-
             </TabItem>
             <TabItem Header="Network">
                 <Canvas Margin="500,200">
                     <Canvas.Background>
                         <VisualBrush Visual="{DynamicResource appbar_warning_circle}" />
                     </Canvas.Background>
+                    <Label Content="Under Construction, Pardon our Llama Dust" Canvas.Top="47" Canvas.Left="-96" />
                 </Canvas>
             </TabItem>
             <TabItem Header="Health">
-                <Canvas Margin="500,200">
-                    <Canvas.Background>
-                        <VisualBrush Visual="{DynamicResource appbar_warning_circle}" />
-                    </Canvas.Background>
-                </Canvas>
+                <Grid>
+                    <GroupBox Header="Health" Margin="285,18,284,213">
+                        <Grid HorizontalAlignment="Left" Height="188" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
+                            <Label Content="Manufacturer:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Model:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Firmware Version:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+                            <Label Content="System Type:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                            <Label Content="CPU:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Memory:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl0" Content="..." HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl1" Content="..." HorizontalAlignment="Left" Margin="157,36,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl2" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl3" Content="..." HorizontalAlignment="Left" Margin="157,88,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl4" Content="..." HorizontalAlignment="Left" Margin="157,114,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl5" Content="..." HorizontalAlignment="Left" Margin="157,140,0,0" VerticalAlignment="Top" />
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Trusted Computing" Margin="285,253,284,28">
+                        <Grid HorizontalAlignment="Left" Height="132" Margin="0,0,0,0" VerticalAlignment="Top" Width="469">
+                            <Label Content="Antivirus Status:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                            <Label Content=":" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Firewall Status:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lblAVStatus" Content="..." HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl7" Content="..." HorizontalAlignment="Left" Margin="157,36,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl8" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
+                        </Grid>
+                    </GroupBox>
+                    <Label x:Name="lbl00" Content="..." HorizontalContentAlignment="Center" HorizontalAlignment="Left" Margin="10,213,0,0" VerticalAlignment="Top" Width="270" FontWeight="Bold" FontSize="14"/>
+                    <TextBox x:Name="lbl01" HorizontalContentAlignment="Center" HorizontalAlignment="Left" Height="56" Margin="10,239,0,0" TextWrapping="Wrap" Text="..." VerticalAlignment="Top" Width="270" IsTabStop="False" IsReadOnly="True" Background="{x:Null}" BorderBrush="{x:Null}" CaretBrush="{x:Null}" SelectionBrush="{x:Null}" FontStyle="Italic"/>
+
+                    <Label x:Name="lblStabilityIndexScore" HorizontalContentAlignment="Center" Content="..." HorizontalAlignment="Left" Margin="769,127,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="72" Width="269"/>
+                    <Label Content="Stability Index Score" HorizontalContentAlignment="Center" Margin="769,238,10,180"/>
+                    <Button x:Name="btnSIS" Content="What's this?" HorizontalAlignment="Left" Margin="844,272,0,0" VerticalAlignment="Top" Width="118" Click="btnChangePwd_Click"/>
+                    <Controls:ProgressRing x:Name="loadingHealthPage" IsActive="True" />
+                </Grid>
             </TabItem>
             <TabItem Header="Troubleshooting">
                 <Grid>

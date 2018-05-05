@@ -11,6 +11,7 @@ namespace Llama.Library
     {
         ManagementObjectSearcher Win32BIOS = new ManagementObjectSearcher("SELECT * FROM Win32_BIOS");
         ManagementObjectSearcher Win32COMPUTERSYSTEM = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+        ManagementObjectSearcher Win32OPERATINGSYSTEM = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
         ManagementObjectSearcher Win32PROCESSOR = new ManagementObjectSearcher("SELECT * FROM Win32_Processor");
         ManagementObjectSearcher WarrantyInfo = new ManagementObjectSearcher("ROOT\\CMCO", "SELECT * FROM WarrantyInfo"); //Enter the correct WMI information
 
@@ -18,7 +19,7 @@ namespace Llama.Library
         {
             try
             {
-                string[] collectedData = new string[8];
+                string[] collectedData = new string[9];
                 collectedData.SetValue(await Task.Run(() => Model()), 0);
                 collectedData.SetValue(await Task.Run(() => Manufacturer()), 1);
                 collectedData.SetValue(await Task.Run(() => SystemFirmwareVersion()), 2);
@@ -27,6 +28,7 @@ namespace Llama.Library
                 collectedData.SetValue(await Task.Run(() => Processor()), 5);
                 collectedData.SetValue(await Task.Run(() => Memory()), 6);
                 collectedData.SetValue(ComputerName(), 7);
+                collectedData.SetValue(await Task.Run(() => UpTime()), 8);
 
 
                 return collectedData;
@@ -222,6 +224,28 @@ namespace Llama.Library
             }
 
             return "Unknown";
+        }
+
+        public async Task<string> UpTime()
+        {
+            foreach (ManagementObject wmi in Win32OPERATINGSYSTEM.Get())
+            {
+                try
+                {
+                    string uptime = "";
+                    DateTime lastBoot = await Task.Run(() => ManagementDateTimeConverter.ToDateTime(wmi.GetPropertyValue("LastBootUpTime").ToString()));
+                    //uptime = await Task.Run(() => (DateTime.Now.ToUniversalTime() - lastBoot.ToUniversalTime()).ToString());
+                    uptime = "Up for " + (DateTime.Now.ToUniversalTime() - lastBoot.ToUniversalTime()).ToString() + " days.";
+                    return uptime;
+                }
+                catch
+                {
+                    return "Unknown";
+                }
+            }
+
+            return "Unknown";
+
         }
 
         public string IPAddress()

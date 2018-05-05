@@ -11,6 +11,8 @@ namespace Llama.Library
     public class Software
     {
         ManagementObjectSearcher Win32COMPUTERSYSTEM = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+        ManagementObjectSearcher Win32ANTIVIRUSPRODUCT = new ManagementObjectSearcher("ROOT\\SecurityCenter2", "SELECT * FROM AntiVirusProduct");
+        ManagementObjectSearcher Win32RELIABILITYSTABILITYMETRICS = new ManagementObjectSearcher("SELECT * FROM  Win32_ReliabilityStabilityMetrics");
 
         public string OperatingSystemName()
         {
@@ -65,6 +67,41 @@ namespace Llama.Library
             }
 
             return "Unknown";
+        }
+
+        public async Task<string> AntiVirusStatus()
+        {
+            foreach (ManagementObject wmi in Win32ANTIVIRUSPRODUCT.Get())
+            {
+                try
+                {
+                    string product = await Task.Run(() => wmi.GetPropertyValue("displayName").ToString());
+                    return "Running";
+                }
+                catch
+                {
+                    return "Not Running";
+                }
+            }
+
+            return "Unknown";
+        }
+
+        public async Task<string> StabilityIndexScore()
+        {
+            foreach (ManagementObject wmi in Win32RELIABILITYSTABILITYMETRICS.Get())
+            {
+                try
+                {
+                    return await Task.Run(() => wmi.GetPropertyValue("SystemStabilityIndex").ToString());
+                }
+                catch
+                {
+                    return "?";
+                }
+            }
+
+            return "?";
         }
 
         public bool IsRebootPending()

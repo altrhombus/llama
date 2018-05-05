@@ -29,7 +29,8 @@ namespace LlamaTwo.WPF
             InitializeComponent();
 
             LoadYouContent();
-            LoadYourComputerContent();
+            LoadPCContent();
+            LoadHealthContent();
         }
 
         private async void LoadYouContent()
@@ -79,11 +80,11 @@ namespace LlamaTwo.WPF
             loadingYouPage.IsActive = false;
         }
 
-        private async void LoadYourComputerContent()
+        private async void LoadPCContent()
         {
             try
             {
-                string[] populateTheFields = new string[8];
+                string[] populateTheFields = new string[9];
 
                 populateTheFields = await hw.GetHardwareObject();
 
@@ -95,11 +96,13 @@ namespace LlamaTwo.WPF
                 lblCPU.Content = populateTheFields[5];
                 lblMemory.Content = populateTheFields[6] + "GB";
                 lblComputerName.Content = populateTheFields[7];
-                
+                lblUptime.Text = populateTheFields[8];
+
                 lblOSName.Content = sw.OperatingSystemName();
                 lblOSBuild.Content = sw.OperatingSystemBuild();
                 lblOSRelease.Content = sw.OperatingSystemReleaseId();
                 chkIsRebootPending.IsChecked = sw.IsRebootPending();
+                
             }
             catch (Exception e)
             {
@@ -108,6 +111,22 @@ namespace LlamaTwo.WPF
 
             loadingYourComputerPage.IsActive = false;
         }
+
+        private async void LoadHealthContent()
+        {
+            try
+            {
+                lblStabilityIndexScore.Content = await sw.StabilityIndexScore();
+                lblAVStatus.Content = await sw.AntiVirusStatus();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+
+            loadingHealthPage.IsActive = false;
+        }
+
         private void ViewUndetailsPage(object sender, RoutedEventArgs e)
         {
             this.Hide();
