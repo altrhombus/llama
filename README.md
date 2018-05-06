@@ -6,7 +6,7 @@ Welcome!
 The Llama is an easy way for admins and users alike to quickly get information about a computer.
 
 ## Description
-The Llama originally started out as an application that grabbed the name of a computer and displayed it on the screen. It then turned into an application to learn how C# await/async worked, and also how to make an app look like (using MahApps). Eventually it will help with learning how to make a proper MVC application. :)
+The Llama originally started out as an application that grabbed the name of a computer and displayed it on the screen. It then turned into an application to learn how C# await/async worked, and also how to make an app look nice (using MahApps). Eventually it will help with learning how to make a proper MVC application. :)
 
 
 ### Prequisites
