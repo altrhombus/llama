@@ -91,14 +91,14 @@ namespace LlamaTwo.WPF
                 lblModel.Content = populateTheFields[0];
                 lblManufacturer.Content = populateTheFields[1];
                 lblFwVer.Content = populateTheFields[2];
-                lblSysType.Content = populateTheFields[3];
+                lblSerialNumber.Content = populateTheFields[3];
                 lblHwWarExpiration.Content = populateTheFields[4];
                 lblCPU.Content = populateTheFields[5];
                 lblMemory.Content = populateTheFields[6] + "GB";
                 lblComputerName.Content = populateTheFields[7];
                 lblUptime.Text = populateTheFields[8];
 
-                lblOSName.Content = sw.OperatingSystemName();
+                lblOSName.Content = sw.OperatingSystemName() + " " + await sw.OperatingSystemBitness();
                 lblOSBuild.Content = sw.OperatingSystemBuild();
                 lblOSRelease.Content = sw.OperatingSystemReleaseId();
                 chkIsRebootPending.IsChecked = sw.IsRebootPending();

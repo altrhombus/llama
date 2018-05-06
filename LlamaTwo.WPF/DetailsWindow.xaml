@@ -79,13 +79,13 @@
                             <Label Content="Manufacturer:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                             <Label Content="Model:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
                             <Label Content="Firmware Version:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
-                            <Label Content="System Type:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                            <Label Content="Serial Number:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
                             <Label Content="CPU:" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top"/>
                             <Label Content="Memory:" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblManufacturer" Content="..." HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblModel" Content="..." HorizontalAlignment="Left" Margin="157,36,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblFwVer" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="lblSysType" Content="..." HorizontalAlignment="Left" Margin="157,88,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lblSerialNumber" Content="..." HorizontalAlignment="Left" Margin="157,88,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblCPU" Content="..." HorizontalAlignment="Left" Margin="157,114,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblMemory" Content="..." HorizontalAlignment="Left" Margin="157,140,0,0" VerticalAlignment="Top" />
                         </Grid>

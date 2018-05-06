@@ -11,6 +11,7 @@ namespace Llama.Library
     public class Software
     {
         ManagementObjectSearcher Win32COMPUTERSYSTEM = new ManagementObjectSearcher("SELECT * FROM Win32_ComputerSystem");
+        ManagementObjectSearcher Win32OPERATINGSYSTEM = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
         ManagementObjectSearcher Win32ANTIVIRUSPRODUCT = new ManagementObjectSearcher("ROOT\\SecurityCenter2", "SELECT * FROM AntiVirusProduct");
         ManagementObjectSearcher Win32RELIABILITYSTABILITYMETRICS = new ManagementObjectSearcher("SELECT * FROM  Win32_ReliabilityStabilityMetrics");
 
@@ -102,6 +103,24 @@ namespace Llama.Library
             }
 
             return "?";
+        }
+
+        public async Task<string> OperatingSystemBitness()
+        {
+            foreach (ManagementObject wmi in Win32OPERATINGSYSTEM.Get())
+            {
+                try
+                {
+                    return await Task.Run(() => "(" + wmi.GetPropertyValue("OSArchitecture").ToString() + ")");
+                }
+                catch
+                {
+                    return "";
+                }
+            }
+
+            return "";
+
         }
 
         public bool IsRebootPending()

@@ -23,7 +23,7 @@ namespace Llama.Library
                 collectedData.SetValue(await Task.Run(() => Model()), 0);
                 collectedData.SetValue(await Task.Run(() => Manufacturer()), 1);
                 collectedData.SetValue(await Task.Run(() => SystemFirmwareVersion()), 2);
-                collectedData.SetValue(await Task.Run(() => SystemType()), 3);
+                collectedData.SetValue(await Task.Run(() => SerialNumber()), 3);
                 collectedData.SetValue(await Task.Run(() => DaysUntilWarrantyExpiration()), 4);
                 collectedData.SetValue(await Task.Run(() => Processor()), 5);
                 collectedData.SetValue(await Task.Run(() => Memory()), 6);
