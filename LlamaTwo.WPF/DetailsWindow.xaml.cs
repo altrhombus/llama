@@ -24,6 +24,8 @@ namespace LlamaTwo.WPF
         Llama.Library.User user = new Llama.Library.User();
         Llama.Library.Hardware hw = new Llama.Library.Hardware();
         Llama.Library.Software sw = new Llama.Library.Software();
+        Llama.Library.Troubleshooting tb = new Llama.Library.Troubleshooting();
+
         public DetailsWindow()
         {
             InitializeComponent();
@@ -233,6 +235,17 @@ namespace LlamaTwo.WPF
             process.StartInfo.Arguments = "/rel";
             process.Start();
             await this.ShowMessageAsync("Stability Index Score", "The stability index assesses your system's overall stability on a scale from 1 to 10. The Reliability Monitor has been launched so you can review historical data.", MessageDialogStyle.Affirmative);
+        }
+
+        private async void lbiCcmLogs_MouseUp(object sender, MouseButtonEventArgs e)
+        {
+            var ccmLogsExport = await this.ShowProgressAsync("Exporting CCM Logs", "Copying logs to a temporary location...");
+            ccmLogsExport.SetIndeterminate();
+            await tb.CollectCCMLogs();
+            ccmLogsExport.SetMessage("Compressing log files...");
+            await tb.CompressCCMLogs();
+            await ccmLogsExport.CloseAsync();
+            await this.ShowMessageAsync("CCM Logs Exported", "A CCMLOGS zip file has been placed on your desktop. Please submit this file to your technical team for further assistance.", MessageDialogStyle.Affirmative);
         }
     }
 }

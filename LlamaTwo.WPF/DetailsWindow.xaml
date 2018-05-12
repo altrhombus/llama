@@ -215,7 +215,7 @@
                     <GroupBox Header="Log Collection" Margin="541,28,28,131">
                         <Grid HorizontalAlignment="Left" Height="263" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
                             <ListBox HorizontalAlignment="Left" Height="246" Margin="0,0,0,0" VerticalAlignment="Top" Width="469">
-                                <ListBoxItem Content="Configuration Manager Logs"/>
+                                <ListBoxItem Content="Configuration Manager Logs" MouseUp="lbiCcmLogs_MouseUp"/>
                             </ListBox>
                         </Grid>
                     </GroupBox>
