@@ -225,6 +225,26 @@ namespace Llama.Library
 
             return "Unknown";
         }
+        
+        public async Task<bool> DomainMember()
+        {
+            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            {
+                try
+                {
+
+                    string isDomainJoined = await Task.Run(() => wmi.GetPropertyValue("PartOfDomain").ToString());
+                    if (isDomainJoined == "True") { return true; }
+                    else { return false; }
+                }
+                catch
+                {
+                    return true;
+                }
+            }
+
+            return true;
+        }
 
         public async Task<string> UpTime()
         {

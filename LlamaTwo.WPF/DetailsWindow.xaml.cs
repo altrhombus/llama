@@ -30,46 +30,57 @@ namespace LlamaTwo.WPF
 
             LoadYouContent();
             LoadPCContent();
+            LoadNetworkContent();
             LoadHealthContent();
+
         }
 
         private async void LoadYouContent()
         {
             try
             {
-                string[] populateTheFields = new string[11];
-                string unformattedManager;
-                int pwExpiration;
-
-                pwExpiration = await user.DaysUntilPasswordExpiration();
-
-                if (pwExpiration == -180)
+                if (await hw.DomainMember() == true)
                 {
-                    lblPwExpiration.Content = "?";
+                    string[] populateTheFields = new string[11];
+                    string unformattedManager;
+                    int pwExpiration;
+
+                    pwExpiration = await user.DaysUntilPasswordExpiration();
+
+                    if (pwExpiration == -180)
+                    {
+                        lblPwExpiration.Content = "?";
+                    }
+                    else
+                    {
+                        lblPwExpiration.Content = pwExpiration.ToString();
+                    }
+
+                    imgUserPhoto.ImageSource = await user.UserPhoto();
+
+                    populateTheFields = await user.GetActiveDirectoryObject();
+
+                    lblUserFullName.Content = populateTheFields[0] + " " + populateTheFields[1];
+                    lblUserTitle.Text = populateTheFields[2];
+                    lblTelephone.Content = populateTheFields[3];
+                    lblMobilePhone.Content = populateTheFields[4];
+                    lblFaxPhone.Content = populateTheFields[5];
+                    lblEmailAddress.Content = populateTheFields[6];
+                    lblSIPAddress.Content = populateTheFields[7];
+                    lblPhysicalAddress.Text = populateTheFields[8];
+                    lblDept.Content = populateTheFields[9];
+                    unformattedManager = populateTheFields[10];
+                    unformattedManager = unformattedManager.Replace("CN=", string.Empty);
+                    unformattedManager = unformattedManager.Replace("\\", string.Empty);
+                    int index = unformattedManager.IndexOf(",OU");
+                    lblManager.Content = unformattedManager.Substring(0, index);
                 }
                 else
                 {
-                    lblPwExpiration.Content = pwExpiration.ToString();
+                    tabYou.Visibility = Visibility.Collapsed;
+                    tabControlDetails.SelectedIndex = 1;
                 }
-
-                imgUserPhoto.ImageSource = await user.UserPhoto();
-
-                populateTheFields = await user.GetActiveDirectoryObject();
-
-                lblUserFullName.Content = populateTheFields[0] + " " + populateTheFields[1];
-                lblUserTitle.Text = populateTheFields[2];
-                lblTelephone.Content = populateTheFields[3];
-                lblMobilePhone.Content = populateTheFields[4];
-                lblFaxPhone.Content = populateTheFields[5];
-                lblEmailAddress.Content = populateTheFields[6];
-                lblSIPAddress.Content = populateTheFields[7];
-                lblPhysicalAddress.Text = populateTheFields[8];
-                lblDept.Content = populateTheFields[9];
-                unformattedManager = populateTheFields[10];
-                unformattedManager = unformattedManager.Replace("CN=", string.Empty);
-                unformattedManager = unformattedManager.Replace("\\", string.Empty);
-                int index = unformattedManager.IndexOf(",OU");
-                lblManager.Content = unformattedManager.Substring(0, index);
+                
 
             }
             catch (Exception e)
@@ -112,12 +123,30 @@ namespace LlamaTwo.WPF
             loadingYourComputerPage.IsActive = false;
         }
 
+        private async void LoadNetworkContent()
+        {
+            try
+            {
+                lblIPAddress.Content = hw.IPAddress();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+            }
+        }
+
         private async void LoadHealthContent()
         {
             try
             {
                 lblStabilityIndexScore.Content = await sw.StabilityIndexScore();
-                lblAVStatus.Content = await sw.AntiVirusStatus();
+                lblThreatProduct.Content = await sw.InstalledThreatProtectionProduct();
+                lblThreatStatus.Content = await sw.ThreatProtectionStatus();
+                lblUACStatus.Content = await sw.UACStatus();
+                lblBootMode.Content = await sw.BootMode();
+                lblSecureBootStatus.Content = await sw.SecureBootStatus();
+                lblMissingDrivers.Content = await sw.GetDriverFaults();
+                lblCcmexecSvc.Content = await sw.CheckCcmexecService();
             }
             catch (Exception e)
             {
@@ -188,10 +217,20 @@ namespace LlamaTwo.WPF
             await this.ShowMessageAsync("Change Password", "To change your password, press CTRL + ALT + DEL and select 'Change a password.'", MessageDialogStyle.Affirmative);
         }
 
+
+
         private void btnHwInvCycle_Click(object sender, MouseButtonEventArgs e)
         {
             TriggerSchedule(hw.ComputerName(), "{00000000-0000-0000-0000-000000000022}");
         }
-        
+
+        private async void btnSIS_Click(object sender, RoutedEventArgs e)
+        {
+            System.Diagnostics.Process process = new System.Diagnostics.Process();
+            process.StartInfo.FileName = "perfmon.exe";
+            process.StartInfo.Arguments = "/rel";
+            process.Start();
+            await this.ShowMessageAsync("Stability Index Score", "The stability index assesses your system's overall stability on a scale from 1 to 10. The Reliability Monitor has been launched so you can review historical data.", MessageDialogStyle.Affirmative);
+        }
     }
 }

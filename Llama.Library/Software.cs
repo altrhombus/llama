@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Management;
+using System.ServiceProcess;
 
 namespace Llama.Library
 {
@@ -14,6 +15,7 @@ namespace Llama.Library
         ManagementObjectSearcher Win32OPERATINGSYSTEM = new ManagementObjectSearcher("SELECT * FROM Win32_OperatingSystem");
         ManagementObjectSearcher Win32ANTIVIRUSPRODUCT = new ManagementObjectSearcher("ROOT\\SecurityCenter2", "SELECT * FROM AntiVirusProduct");
         ManagementObjectSearcher Win32RELIABILITYSTABILITYMETRICS = new ManagementObjectSearcher("SELECT * FROM  Win32_ReliabilityStabilityMetrics");
+        ManagementObjectSearcher Win32PNPENTITY = new ManagementObjectSearcher("SELECT * FROM Win32_PnPEntity");
 
         public string OperatingSystemName()
         {
@@ -70,14 +72,13 @@ namespace Llama.Library
             return "Unknown";
         }
 
-        public async Task<string> AntiVirusStatus()
+        public async Task<string> InstalledThreatProtectionProduct()
         {
             foreach (ManagementObject wmi in Win32ANTIVIRUSPRODUCT.Get())
             {
                 try
                 {
-                    string product = await Task.Run(() => wmi.GetPropertyValue("displayName").ToString());
-                    return "Running";
+                    return await Task.Run(() => wmi.GetPropertyValue("displayName").ToString());
                 }
                 catch
                 {
@@ -86,6 +87,100 @@ namespace Llama.Library
             }
 
             return "Unknown";
+        }
+
+        public async Task<string> ThreatProtectionStatus()
+        {
+            return "Not Implemented";
+        }
+
+        public async Task<string> FirewallStatus()
+        {
+            return "Not Implemented";
+        }
+
+        public async Task<string> GetDriverFaults()
+        {
+            int driverFaultCount = 0;
+            foreach (ManagementObject wmi in Win32PNPENTITY.Get())
+            {
+                try
+                {
+                    if ((!(await Task.Run(() => wmi.GetPropertyValue("ConfigManagerErrorCode").ToString()) == "0")) && (!(await Task.Run(() => wmi.GetPropertyValue("ConfigManagerErrorCode").ToString()) == "22")) && (!(await Task.Run(() => wmi.GetPropertyValue("Name").ToString().Contains("PS/2")))))
+                    {
+                        driverFaultCount++;
+                    }
+                }
+                catch
+                {
+                    return "Unknown";
+                }
+            }
+            if (driverFaultCount == 0)
+            {
+                return "OK";
+            }
+            else
+            {
+                return driverFaultCount.ToString() + " faulty drivers";
+            }
+        }
+
+        public async Task<string> CheckCcmexecService()
+        {
+            try
+            {
+                using (ServiceController sc = new ServiceController("ccmexec"))
+                {
+                    return "OK";
+                }
+            }
+            catch
+            {
+                return "Service is not running";
+            }
+        }
+
+        public async Task<string> UACStatus()
+        {
+            try
+            {
+                string uac = await Task.Run(() => Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System", "EnableLUA", string.Empty).ToString());
+                if (uac == "1") { return "Enabled"; }
+                else { return "Disabled"; }
+            }
+            catch
+            {
+                return "Unknown";
+            }
+        }
+
+        public async Task<string> BootMode()
+        {
+            try
+            {
+                string bootMode = await Task.Run(() => Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecureBoot\State", "UEFISecureBootEnabled", string.Empty).ToString());
+                if (bootMode == "1") { return "UEFI"; }
+                else { return "Legacy BIOS"; }
+            }
+            catch
+            {
+                return "Legacy BIOS";
+            }
+        }
+
+        public async Task<string> SecureBootStatus()
+        {
+            try
+            {
+                string secureBootMode = await Task.Run(() => Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\SecureBoot\State", "UEFISecureBootEnabled", string.Empty).ToString());
+                if (secureBootMode == "1") { return "Enabled"; }
+                else { return "Disabled"; }
+            }
+            catch
+            {
+                return "Disabled";
+            }
         }
 
         public async Task<string> StabilityIndexScore()

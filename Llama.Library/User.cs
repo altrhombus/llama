@@ -57,6 +57,7 @@ namespace Llama.Library
 
         public async Task<int> DaysUntilPasswordExpiration()
         {
+            // This assumes the password lifetime is 180 days. And you what happens when you assume...
             DateTime dtExpire = await PasswordExpirationDate();
             DateTime dtNow = DateTime.Now.Date;
             TimeSpan ts = dtExpire.Subtract(dtNow);
