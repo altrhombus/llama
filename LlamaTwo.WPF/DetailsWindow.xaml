@@ -74,6 +74,11 @@
             </TabItem>
             <TabItem x:Name="tabPC" Header="PC">
                 <Grid>
+                    <Rectangle x:Name="imgChassis" Width="100" Height="100" Margin="95,108,853,238">
+                        <Rectangle.Fill>
+                            <VisualBrush Visual="{StaticResource appbar_cogs}"/>
+                        </Rectangle.Fill>
+                    </Rectangle>
                     <GroupBox Header="Hardware Information" Margin="285,18,284,213">
                         <Grid HorizontalAlignment="Left" Height="188" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
                             <Label Content="Manufacturer:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
@@ -155,12 +160,12 @@
                         <Grid HorizontalAlignment="Left" Height="188" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
                             <Label Content="ConfigMgr Components:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                             <Label Content="Missing Drivers:" HorizontalAlignment="Left" Margin="10,36,0,0" VerticalAlignment="Top"/>
-                            <Label Content="..." HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
-                            <Label Content="..." HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
+                            <Label Content="..." HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                            <Label Content="..." HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
                             <Label x:Name="lblCcmexecSvc" Content="..." HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblMissingDrivers" Content="..." HorizontalAlignment="Left" Margin="157,36,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="lbl2" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="lbl3" Content="..." HorizontalAlignment="Left" Margin="157,88,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lbl2" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
+                            <Label x:Name="lbl3" Content="..." HorizontalAlignment="Left" Margin="157,88,0,0" VerticalAlignment="Top" Visibility="Hidden"/>
                         </Grid>
                     </GroupBox>
 

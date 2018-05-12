@@ -113,6 +113,8 @@ namespace LlamaTwo.WPF
                 lblOSBuild.Content = sw.OperatingSystemBuild();
                 lblOSRelease.Content = sw.OperatingSystemReleaseId();
                 chkIsRebootPending.IsChecked = sw.IsRebootPending();
+
+                if (await hw.Chassis() == "Notebook") { imgChassis.Fill = new VisualBrush() { Visual = (Visual)Resources["appbar_laptop"] }; }
                 
             }
             catch (Exception e)
