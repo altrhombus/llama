@@ -117,7 +117,9 @@ namespace LlamaTwo.WPF
                 chkIsRebootPending.IsChecked = sw.IsRebootPending();
 
                 if (await hw.Chassis() == "Notebook") { imgChassis.Fill = new VisualBrush() { Visual = (Visual)Resources["appbar_laptop"] }; }
-                
+                if (await hw.Chassis() == "Virtual Machine") { imgChassis.Fill = new VisualBrush() { Visual = (Visual)Resources["appbar_companioncube"] }; }
+
+
             }
             catch (Exception e)
             {
@@ -246,6 +248,11 @@ namespace LlamaTwo.WPF
             await tb.CompressCCMLogs();
             await ccmLogsExport.CloseAsync();
             await this.ShowMessageAsync("CCM Logs Exported", "A CCMLOGS zip file has been placed on your desktop. Please submit this file to your technical team for further assistance.", MessageDialogStyle.Affirmative);
+        }
+
+        private async void btn_NeedHelp_Click(object sender, RoutedEventArgs e)
+        {
+            await this.ShowMessageAsync("We're here to help!", "Contact information about the service desk could be posted here!", MessageDialogStyle.Affirmative);
         }
     }
 }

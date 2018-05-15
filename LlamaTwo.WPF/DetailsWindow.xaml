@@ -199,15 +199,15 @@
                     <GroupBox Header="Configuration Manager Tasks" Margin="28,28,541,131">
                         <Grid HorizontalAlignment="Left" Height="263" VerticalAlignment="Top" Width="479" Margin="0,0,0,0">
                             <ListBox HorizontalAlignment="Left" Height="246" Margin="0,0,0,0" VerticalAlignment="Top" Width="469">
-                                <ListBoxItem Content="Application Deployment Evaluation Cycle"/>
-                                <ListBoxItem Content="Discovery Data Collection Cycle"/>
-                                <ListBoxItem Content="Hardware Inventory Cycle" MouseUp="btnHwInvCycle_Click" />
-                                <ListBoxItem Content="Machine Policy Retrieval &amp; Evaluation Cycle"/>
-                                <ListBoxItem Content="Software Metering Usage Report Cycle"/>
-                                <ListBoxItem Content="Software Updates Deployment Evaluation Cycle"/>
-                                <ListBoxItem Content="Software Updates Scan Cycle"/>
-                                <ListBoxItem Content="User Policy Retrieval &amp; Evaluation Cycle"/>
-                                <ListBoxItem Content="Windows Installer Source List Update Cycle"/>
+                                <ListBoxItem x:Name="lbiAppDepEval" Content="Application Deployment Evaluation Cycle"/>
+                                <ListBoxItem x:Name="lbiDiscDataCol" Content="Discovery Data Collection Cycle"/>
+                                <ListBoxItem x:Name="lbiHwInvEval" Content="Hardware Inventory Cycle" MouseUp="btnHwInvCycle_Click" />
+                                <ListBoxItem x:Name="lbiMacPolRetEval" Content="Machine Policy Retrieval &amp; Evaluation Cycle"/>
+                                <ListBoxItem x:Name="lbiSwMetUsgRpt" Content="Software Metering Usage Report Cycle"/>
+                                <ListBoxItem x:Name="lbiSwUpdDepEval" Content="Software Updates Deployment Evaluation Cycle"/>
+                                <ListBoxItem x:Name="lbiSwUpdScan" Content="Software Updates Scan Cycle"/>
+                                <ListBoxItem x:Name="lbiUsrPolRetEval" Content="User Policy Retrieval &amp; Evaluation Cycle"/>
+                                <ListBoxItem x:Name="lbiWinInstListUpd" Content="Windows Installer Source List Update Cycle"/>
                             </ListBox>
                             <Label x:Name="lblConfigMgrStatus" Content="Ready" Margin="0,228,10,10" FontStyle="Italic"/>
                         </Grid>
@@ -219,12 +219,9 @@
                             </ListBox>
                         </Grid>
                     </GroupBox>
-                    <Button Content="Need help?" Margin="480,336,480,84"/>
+                    <Button x:Name="btn_NeedHelp" Content="Need help?" Margin="480,336,480,84" Click="btn_NeedHelp_Click"/>
                 </Grid>
             </TabItem>
-
-
-
         </TabControl>
     </Grid>
 </Controls:MetroWindow>

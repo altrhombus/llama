@@ -34,18 +34,12 @@ namespace Llama.Library
                 {
                     Directory.CreateDirectory(subDirs.Replace(sourceDir, outputDir));
                 }
-                await Task.Delay(2500);
+
                 foreach (string copiedFiles in Directory.GetFiles(sourceDir, "*", SearchOption.AllDirectories))
                 {
                     File.Copy(copiedFiles, copiedFiles.Replace(sourceDir, outputDir), true);
 
                 }
-                await Task.Delay(2500);
-                //foreach (string copiedContent in Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories))
-                //{
-                //    File.Copy(copiedContent, outputDir.Replace(sourceDir, outputDir), true);
-                //    Console.WriteLine ("Copied " + copiedContent.ToString());
-                //}
                 
                 return "good";
             }
