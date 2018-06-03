@@ -58,119 +58,177 @@ namespace Llama.Library
 
         public async Task<string> SerialNumber()
         {
-            foreach (ManagementObject wmi in Win32BIOS.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32BIOS.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("SerialNumber").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("SerialNumber").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
+            
         }
 
         public async Task<string> Model()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("Model").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("Model").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> Manufacturer()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("Manufacturer").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("Manufacturer").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> SystemFirmwareVersion()
         {
-            foreach (ManagementObject wmi in Win32BIOS.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32BIOS.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("SMBIOSBIOSVersion").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("SMBIOSBIOSVersion").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> SystemType()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("SystemType").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("SystemType").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> Chassis()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("ChassisSKUNumber").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("ChassisSKUNumber").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
         public async Task<DateTime> WarrantyExpiration()
         {
-            foreach (ManagementObject wmi in WarrantyInfo.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in WarrantyInfo.Get())
                 {
-                    return await Task.Run(() => Convert.ToDateTime(wmi.GetPropertyValue("EndDate")));
+                    try
+                    {
+                        return await Task.Run(() => Convert.ToDateTime(wmi.GetPropertyValue("EndDate")));
+                    }
+                    catch
+                    {
+                        return DateTime.MinValue;
+                    }
                 }
-                catch
-                {
-                    return DateTime.MinValue;
-                }
-            }
 
-            return DateTime.MinValue;
+                return DateTime.MinValue;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return DateTime.MinValue;
+            }
         }
 
         public async Task<string> DaysUntilWarrantyExpiration()
@@ -190,82 +248,113 @@ namespace Llama.Library
 
         public async Task<string> Processor()
         {
-            foreach (ManagementObject wmi in Win32PROCESSOR.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32PROCESSOR.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("Name").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("Name").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> Memory()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
-                    long rawMemory = 0;
-                    await Task.Run(() => rawMemory = Convert.ToInt64(wmi.GetPropertyValue("TotalPhysicalMemory").ToString()));
-                    rawMemory = rawMemory / 1024 / 1024 / 1000;
-                    // Todo: better calculation here
-                    return rawMemory.ToString();
+                    try
+                    {
+                        long rawMemory = 0;
+                        await Task.Run(() => rawMemory = Convert.ToInt64(wmi.GetPropertyValue("TotalPhysicalMemory").ToString()));
+                        rawMemory = rawMemory / 1024 / 1024 / 1000;
+                        // Todo: better calculation here
+                        return rawMemory.ToString();
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
         
         public async Task<bool> DomainMember()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
+                    try
+                    {
 
-                    string isDomainJoined = await Task.Run(() => wmi.GetPropertyValue("PartOfDomain").ToString());
-                    if (isDomainJoined == "True") { return true; }
-                    else { return false; }
+                        string isDomainJoined = await Task.Run(() => wmi.GetPropertyValue("PartOfDomain").ToString());
+                        if (isDomainJoined == "True") { return true; }
+                        else { return false; }
+                    }
+                    catch
+                    {
+                        return true;
+                    }
                 }
-                catch
-                {
-                    return true;
-                }
+
+                return true;
             }
-
-            return true;
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return true;
+            }
         }
 
         public async Task<string> UpTime()
         {
-            foreach (ManagementObject wmi in Win32OPERATINGSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32OPERATINGSYSTEM.Get())
                 {
-                    string uptime = "";
-                    DateTime lastBoot = await Task.Run(() => ManagementDateTimeConverter.ToDateTime(wmi.GetPropertyValue("LastBootUpTime").ToString()));
-                    //uptime = await Task.Run(() => (DateTime.Now.ToUniversalTime() - lastBoot.ToUniversalTime()).ToString());
-                    uptime = "Up for " + (DateTime.Now.ToUniversalTime() - lastBoot.ToUniversalTime()).ToString() + " days.";
-                    return uptime;
+                    try
+                    {
+                        string uptime = "";
+                        DateTime lastBoot = await Task.Run(() => ManagementDateTimeConverter.ToDateTime(wmi.GetPropertyValue("LastBootUpTime").ToString()));
+                        //uptime = await Task.Run(() => (DateTime.Now.ToUniversalTime() - lastBoot.ToUniversalTime()).ToString());
+                        uptime = "Up for " + (DateTime.Now.ToUniversalTime() - lastBoot.ToUniversalTime()).ToString() + " days.";
+                        return uptime;
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
+
+                return "Unknown";
             }
-
-            return "Unknown";
-
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public string IPAddress()
