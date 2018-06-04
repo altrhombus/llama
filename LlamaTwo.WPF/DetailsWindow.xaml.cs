@@ -153,6 +153,7 @@ namespace LlamaTwo.WPF
                 lblSecureBootStatus.Content = await sw.SecureBootStatus();
                 lblMissingDrivers.Content = await sw.GetDriverFaults();
                 lblCcmexecSvc.Content = await sw.CheckCcmexecService();
+                lblFwStatus.Content = sw.FirewallStatus();
             }
             catch (Exception e)
             {

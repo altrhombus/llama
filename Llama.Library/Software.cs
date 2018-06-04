@@ -159,9 +159,23 @@ namespace Llama.Library
             }
         }
 
-        public async Task<string> FirewallStatus()
+        public string FirewallStatus()
         {
-            return "Not Implemented";
+            try
+            {
+                switch (Registry.GetValue(@"HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\SharedAccess\Parameters\FirewallPolicy\StandardProfile", "EnableFirewall", string.Empty).ToString())
+                {
+                    case "0":
+                        return "Disabled";
+                    case "1":
+                        return "Enabled";
+                }
+            }
+            catch
+            {
+                return "Unknown";
+            }
+            return "Unknown";
         }
 
         public async Task<string> GetDriverFaults()

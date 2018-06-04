@@ -176,7 +176,7 @@
                             <Label Content="Firewall:" HorizontalAlignment="Left" Margin="10,62,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblThreatProduct" Content="..." HorizontalAlignment="Left" Margin="157,10,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblThreatStatus" Content="..." HorizontalAlignment="Left" Margin="157,36,0,0" VerticalAlignment="Top"/>
-                            <Label x:Name="lbl8" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
+                            <Label x:Name="lblFwStatus" Content="..." HorizontalAlignment="Left" Margin="157,62,0,0" VerticalAlignment="Top"/>
                             <Label Content="UAC:" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top"/>
                             <Label x:Name="lblUACStatus" Content="..." HorizontalAlignment="Left" Margin="157,88,0,0" VerticalAlignment="Top"/>
                             <Label Content="Boot Mode:" HorizontalAlignment="Left" Margin="10,114,0,-8" VerticalAlignment="Top"/>
