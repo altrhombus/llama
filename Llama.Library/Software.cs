@@ -57,41 +57,106 @@ namespace Llama.Library
 
         public async Task<string> ComputerDomain()
         {
-            foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32COMPUTERSYSTEM.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("Domain").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("Domain").ToString());
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
                 }
-                catch
-                {
-                    return "Unknown";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> InstalledThreatProtectionProduct()
         {
-            foreach (ManagementObject wmi in Win32ANTIVIRUSPRODUCT.Get())
+            try
             {
-                try
+                foreach (ManagementObject wmi in Win32ANTIVIRUSPRODUCT.Get())
                 {
-                    return await Task.Run(() => wmi.GetPropertyValue("displayName").ToString());
+                    try
+                    {
+                        return await Task.Run(() => wmi.GetPropertyValue("displayName").ToString());
+                    }
+                    catch
+                    {
+                        return "Not Running";
+                    }
                 }
-                catch
-                {
-                    return "Not Running";
-                }
-            }
 
-            return "Unknown";
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> ThreatProtectionStatus()
         {
-            return "Not Implemented";
+            uint threatProtectionStatus = 0;
+            string hexThreatProtectionStatus = null;
+            string output = null;
+            try
+            {
+                foreach (ManagementObject wmi in Win32ANTIVIRUSPRODUCT.Get())
+                {
+                    try
+                    {
+                        threatProtectionStatus = await Task.Run(() => Convert.ToUInt32(wmi.GetPropertyValue("productState").ToString()));
+                        hexThreatProtectionStatus = threatProtectionStatus.ToString("X");
+                        switch (hexThreatProtectionStatus.Substring(1, 2))
+                        {
+                            case "10":
+                                output = "Not Enabled";
+                                Console.WriteLine("Security product is not enabled");
+                                break;
+                            case "11":
+                                output = "Enabled";
+                                Console.WriteLine("Security product is enabled");
+                                break;
+                        }
+                        output = output + " and ";
+
+                        switch (hexThreatProtectionStatus.Substring(3, 2))
+                        {
+                            case "00":
+                                output = output + "up to date";
+                                Console.WriteLine("Security product is up to date");
+                                break;
+                            case "10":
+                                output = output + "not up to date";
+                                Console.WriteLine("Security product is not up to date");
+                                break;
+                        }
+                        return output;
+                    }
+                    catch
+                    {
+                        return "Unknown";
+                    }
+                }
+
+                return "Unknown";
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.ToString());
+                return "Unknown";
+            }
         }
 
         public async Task<string> FirewallStatus()
