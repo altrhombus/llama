@@ -17,6 +17,12 @@
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Window.Resources>
+	<Window.CommandBindings>
+		<CommandBinding Command="Copy" Executed="CopyCommand" />
+	</Window.CommandBindings>
+	<Window.InputBindings>
+		<KeyBinding Key="C" Modifiers="Ctrl" Command="Copy" />
+	</Window.InputBindings>
     <Controls:MetroWindow.RightWindowCommands>
             <Controls:WindowCommands>
                 <Button Content="refresh" Click="RefreshCurrentPage"/>

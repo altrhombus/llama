@@ -63,5 +63,10 @@ namespace LlamaTwo.WPF
             aboutWindow.Show();
             this.Close();
         }
+
+        private void CopyCommand(object sender, ExecutedRoutedEventArgs e)
+        {
+            Clipboard.SetText(hw.ComputerName());
+        }
     }
 }
